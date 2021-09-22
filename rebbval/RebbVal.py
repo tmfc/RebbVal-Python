@@ -24,6 +24,8 @@ class RebbVal:
         lexer = RebbValLexer(input_stream)
         stream = CommonTokenStream(lexer)
         parser = RebbValParser(stream)
+        # TODO: add Error listener
+        # parser.addErrorListener()
         tree = parser.unaryTests()
 
         self.engine.set_object(obj)

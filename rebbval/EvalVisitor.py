@@ -52,7 +52,10 @@ class EvalVisitor(RebbValVisitor):
         self.__config[key] = value
 
     def __get_value(self, key):
-        return self.__values[key]
+        if key in self.__values:
+            return self.__values[key]
+        else:
+            return None
 
     def __set_value(self, key, value):
         self.__values[key] = value
@@ -64,6 +67,9 @@ class EvalVisitor(RebbValVisitor):
         return isinstance(value, datetime)
 
     def __is_number(self, value):
+        if value is None:
+            return False
+
         is_number = True
         try:
             num = float(value)
@@ -200,8 +206,12 @@ class EvalVisitor(RebbValVisitor):
 
             diff = relativedelta(now, birth)
             diff_y = diff.years
+            if diff.months > 0:
+                diff_y = diff_y + diff.months / 12.0
+            if diff.days > 0:
+                diff_y = diff_y + diff.days / 365.2425
 
-            expr_value = self.__parse_number(expr_value)
+            expr_value = expr_value
 
             if ctx.op.type == RebbValParser.OLDER:
                 result = diff_y > expr_value
