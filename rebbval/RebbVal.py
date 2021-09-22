@@ -12,7 +12,7 @@ class RebbVal:
 
     def __init__(self):
         self.errors = []
-        self.engine = EvalVisitor("", RebbVal.global_config);
+        self.engine = EvalVisitor("", RebbVal.global_config)
 
     def date(self, date_str):
         return datetime.datetime.strptime(date_str, '%Y-%m-%d')
