@@ -66,6 +66,9 @@ class EvalVisitor(RebbValVisitor):
     def __is_date(self, value):
         return isinstance(value, datetime)
 
+    def __is_list(self, value):
+        return isinstance(value, list)
+    
     def __is_number(self, value):
         if value is None:
             return False
@@ -87,6 +90,9 @@ class EvalVisitor(RebbValVisitor):
                 return int(value)
             except ValueError:
                 return float(value)
+
+    def __is_string(self, value):
+        return isinstance(value, str)
 
     # region Unary Test and Combination
     def visitConjunction(self, ctx: RebbValParser.ConjunctionContext):
@@ -186,6 +192,8 @@ class EvalVisitor(RebbValVisitor):
             array = []
             for tree in ctx.arrayLiteral().NumbericLiteral():
                 element = tree.getText()
+                if self.__is_number(element):
+                    element = self.__parse_number(element)
                 array.append(element)
 
             self.__set_value(ctx, array)
@@ -224,4 +232,47 @@ class EvalVisitor(RebbValVisitor):
                 self.__set_value(ctx, False)
         else:
             self.__valid = False
+            self.__error = "ObjectTypeNotSupported"
+
+    def visitBetween(self, ctx:RebbValParser.BetweenContext):
+        self.visit(ctx.expression(0))
+        self.visit(ctx.expression(1))
+        l_value = self.__get_value(ctx.expression(0))
+        r_value = self.__get_value(ctx.expression(1))
+        if self.__is_number(self.__obj) and self.__is_number(l_value) and self.__is_number(r_value):
+            if l_value <= self.__obj <= r_value:
+                self.__set_value(ctx, True)
+            else:
+                self.__set_value(ctx, False)
+        elif self.__is_date(self.__obj) and self.__is_date(l_value) and self.__is_date(r_value):
+            if l_value <= self.__obj <= r_value:
+                self.__set_value(ctx, True)
+
+            else:
+                self.__set_value(ctx, False)
+        else:
+            self.__set_value(ctx, False)
+            self.__error = "ObjectTypeNotSupported"
+
+    def visitIn(self, ctx:RebbValParser.InContext):
+        self.visit(ctx.expression())
+        expr_value = self.__get_value(ctx.expression())
+        if self.__is_string(self.__obj) and self.__is_string(expr_value):
+            self.__set_value(ctx, self.__obj in expr_value)
+        elif self.__is_number(self.__obj) and self.__is_list(expr_value):
+            self.__set_value(ctx, self.__obj in expr_value)
+        else:
+            self.__set_value(ctx, False)
+            self.__error = "ObjectTypeNotSupported"
+
+    def visitContains(self, ctx: RebbValParser.ContainsContext):
+        self.visit(ctx.expression())
+        expr_value = self.__get_value(ctx.expression())
+        if self.__is_string(self.__obj) and self.__is_string(expr_value):
+            if expr_value in self.__obj:
+                self.__set_value(ctx, True)
+            else:
+                self.__set_value(ctx, False)
+        else:
+            self.__set_value(ctx, False)
             self.__error = "ObjectTypeNotSupported"
