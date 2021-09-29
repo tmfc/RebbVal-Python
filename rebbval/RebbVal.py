@@ -2,6 +2,7 @@ import datetime
 
 from antlr4 import InputStream, CommonTokenStream
 
+from rebbval.RebbValErrorListener import RebbValErrorListener
 from rebbval.EvalVisitor import EvalVisitor
 from rebbval.RebbValLexer import RebbValLexer
 from rebbval.RebbValParser import RebbValParser
@@ -31,9 +32,11 @@ class RebbVal:
         lexer = RebbValLexer(input_stream)
         stream = CommonTokenStream(lexer)
         parser = RebbValParser(stream)
-        # TODO: add Error listener
-        # parser.addErrorListener()
+        parser.addErrorListener(RebbValErrorListener.INSTANCE)
         tree = parser.unaryTests()
+        if RebbValErrorListener.INSTANCE.error:
+            self.errors.append(RebbValErrorListener.INSTANCE.error)
+            return False
 
         self.engine.set_object(obj)
         self.engine.visit(tree)
