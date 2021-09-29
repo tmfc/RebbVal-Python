@@ -17,6 +17,13 @@ class RebbVal:
     def date(self, date_str):
         return datetime.datetime.strptime(date_str, '%Y-%m-%d')
 
+    @staticmethod
+    def add_global_config(key, value):
+        RebbVal.global_config[key] = value
+
+    def add_config(self, key, value):
+        self.engine.add_config(key, value)
+
     def val(self, obj, condition):
         self.errors = []
 

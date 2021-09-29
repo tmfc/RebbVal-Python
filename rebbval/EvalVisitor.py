@@ -1,7 +1,9 @@
 from datetime import timezone, datetime, time
 from dateutil.relativedelta import relativedelta
 
+from rebbval.BuildInFunctions import BuildInFunctions
 from rebbval.RebbValConfig import RebbValConfig
+from rebbval.RebbValHelper import RebbValHelper
 from rebbval.RebbValParser import RebbValParser
 from rebbval.RebbValVisitor import RebbValVisitor
 
@@ -60,39 +62,29 @@ class EvalVisitor(RebbValVisitor):
     def __set_value(self, key, value):
         self.__values[key] = value
 
-    def __is_bool(self, value):
-        return isinstance(value, bool)
+    @staticmethod
+    def __is_bool(value):
+        return RebbValHelper.is_bool(value)
 
-    def __is_date(self, value):
-        return isinstance(value, datetime)
+    @staticmethod
+    def __is_date(value):
+        return RebbValHelper.is_date(value)
 
-    def __is_list(self, value):
-        return isinstance(value, list)
+    @staticmethod
+    def __is_list(value):
+        return RebbValHelper.is_list(value)
     
-    def __is_number(self, value):
-        if value is None:
-            return False
+    @staticmethod
+    def __is_number(value):
+        return RebbValHelper.is_number(value)
 
-        is_number = True
-        try:
-            num = float(value)
-            # check for "nan" floats
-            is_number = num == num  # or use `math.isnan(num)`
-        except ValueError:
-            is_number = False
-        return is_number
+    @staticmethod
+    def __parse_number(value):
+        return RebbValHelper.parse_number(value)
 
-    def __parse_number(self, value):
-        if not self.__is_number(value):
-            return None
-        else:
-            try:
-                return int(value)
-            except ValueError:
-                return float(value)
-
-    def __is_string(self, value):
-        return isinstance(value, str)
+    @staticmethod
+    def __is_string(value):
+        return RebbValHelper.is_string(value)
 
     # region Unary Test and Combination
     def visitConjunction(self, ctx: RebbValParser.ConjunctionContext):
@@ -234,7 +226,7 @@ class EvalVisitor(RebbValVisitor):
             self.__valid = False
             self.__error = "ObjectTypeNotSupported"
 
-    def visitBetween(self, ctx:RebbValParser.BetweenContext):
+    def visitBetween(self, ctx: RebbValParser.BetweenContext):
         self.visit(ctx.expression(0))
         self.visit(ctx.expression(1))
         l_value = self.__get_value(ctx.expression(0))
@@ -254,7 +246,7 @@ class EvalVisitor(RebbValVisitor):
             self.__set_value(ctx, False)
             self.__error = "ObjectTypeNotSupported"
 
-    def visitIn(self, ctx:RebbValParser.InContext):
+    def visitIn(self, ctx: RebbValParser.InContext):
         self.visit(ctx.expression())
         expr_value = self.__get_value(ctx.expression())
         if self.__is_string(self.__obj) and self.__is_string(expr_value):
@@ -276,3 +268,8 @@ class EvalVisitor(RebbValVisitor):
         else:
             self.__set_value(ctx, False)
             self.__error = "ObjectTypeNotSupported"
+
+    def visitIs(self, ctx: RebbValParser.IsContext):
+        b = BuildInFunctions(self.__config)
+        # result = False
+        self.__set_value(ctx, b.check(ctx.is_type.type, self.__obj))
