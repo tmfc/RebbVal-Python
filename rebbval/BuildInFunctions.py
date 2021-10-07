@@ -1,4 +1,6 @@
 import calendar
+import datetime
+import re
 
 from rebbval.RebbValConfig import RebbValConfig
 from rebbval.RebbValHelper import RebbValHelper
@@ -17,6 +19,12 @@ class BuildInFunctions:
         self.__function_map[str(RebbValParser.FALSE)] = self.check_false
         self.__function_map[str(RebbValParser.LEAPYEAR)] = self.check_leap_year
         self.__function_map[str(RebbValParser.LEAPDAY)] = self.check_leap_day
+        self.__function_map[str(RebbValParser.IMEI)] = self.check_imei
+        self.__function_map[str(RebbValParser.IMEISV)] = self.check_imeisv
+        self.__function_map[str(RebbValParser.ISBN)] = self.check_isbn
+        self.__function_map[str(RebbValParser.UUID)] = self.check_uuid
+        self.__function_map[str(RebbValParser.MAC)] = self.check_mac
+        self.__function_map[str(RebbValParser.ID)] = self.check_id
 
     def check(self, check_type, obj):
         return self.__function_map[str(check_type)](obj)
@@ -48,5 +56,102 @@ class BuildInFunctions:
         else:
             self.error = "ObjectTypeNotDate"
             return False
+
+    def check_imei(self, obj):
+        regex = r'^(\d{15})|^(\d{2}\-\d{6}\-\d{6}\-\d)'
+        result = self.__check_regex(obj, regex)
+        if result:
+            imei = obj.replace("-", "")
+
+            check = imei[14]
+            imei = imei[0:14]
+            check_sum = 0
+
+            for i in range(len(imei)):
+                _weight = 1
+                if i % 2 == 1:
+                    _weight = 2
+
+                _char_int = int(imei[i]) * _weight
+                if _char_int >= 10:
+                    _char_int = _char_int - 9
+
+                check_sum += _char_int
+            
+            check_sum %= 10
+            check_sum = 0 if check_sum == 0 else (10 - check_sum)
+
+            return check_sum == int(check)
         
-    
+        return False
+
+    def check_imeisv(self, obj):
+        regex = r'^(\d{16})|^(\d{2}\-\d{6}\-\d{6}\-\d{2})'
+        return self.__check_regex(obj, regex)
+
+    def check_isbn(self, obj):
+        regex = r"^(?:ISBN(?:-1[03])?:?●)?(?=[-0-9●]{17}$|[-0-9X●]{13}$|[0-9X]{10}$)(?:97[89][-●]?)?[0-9]{1,5}[-●]?(?:[0-9]+[-●]?){2}[0-9X]$"
+        result = self.__check_regex(obj, regex)
+        if result:
+            isbn = obj.replace("-", "")
+
+            checksum = 0
+            for i in range(len(isbn)):
+                weight = 1
+                if i % 2 == 1:
+                    weight = 3
+                char_int = int(isbn[i])
+                a = char_int * weight
+                checksum += a
+            return checksum % 10 == 0
+        return False
+
+    def check_uuid(self, obj):
+        regex = "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"
+        return self.__check_regex(obj, regex)
+
+    def check_id(self, obj):
+        regex = r"(^[1-9]\d{5}(18|19|([23]\d))\d{2}((0[1-9])|(10|11|12))(([0-2][1-9])|10|20|30|31)\d{3}[0-9Xx])"
+        regex_result = self.__check_regex(obj, regex)
+        if not regex_result:
+            return False
+
+        id = obj
+        # check area code
+        areas = [11, 12, 13, 14, 15, 21, 22, 23, 31, 32, 33, 34, 35, 36, 37, 41, 42, 43, 44, 45, 46, 50, 51, 52, 53, 54, 61, 62, 63, 64, 65, 71, 81, 82, 91]
+        area = int(id[0:2])
+        if area not in areas:
+            return False
+
+        # check birthday
+        birthday = id[6:14]
+        try:
+            dt = datetime.datetime.strptime(birthday, '%Y%m%d')
+        except ValueError as error:
+            self.error = str(error)
+            return False
+
+        # checksum
+        checksum = 0
+        weight = [7, 9, 10, 5, 8, 4, 2, 1, 6, 3, 7, 9, 10, 5, 8, 4, 2]
+        for i in range(17):
+            char_int = int(id[i])
+            a = char_int * weight[i]
+            checksum += a
+
+        checksum_char_list = ["1", "0", "X", "9", "8", "7", "6", "5", "4", "3", "2"]
+        checksum_char = checksum_char_list[checksum % 11]
+        return str(checksum_char) == id[-1]
+
+    def check_mac(self, obj):
+        regex = "^((?:[a-fA-F0-9]{2}[:-]){5}[a-fA-F0-9]{2})"
+        return self.__check_regex(obj, regex)
+
+    def __check_regex(self, obj, regex):
+        if RebbValHelper.is_string(obj):
+            p = re.compile(regex)
+            m = p.search(obj)
+            return m is not None
+        else:
+            self.error = "ObjectTypeNotSupport"
+            return False
