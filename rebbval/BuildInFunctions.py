@@ -26,7 +26,7 @@ class BuildInFunctions:
             return obj is True
         elif isinstance(obj, str):
             return obj in self.__config[RebbValConfig.TRUE_STRING]
-        elif RebbValHelper.is_number(obj):
+        elif RebbValHelper.is_numeric(obj):
             return RebbValHelper.parse_number(obj) == 1
         else:
             self.error = "ObjectTypeNotSupport"

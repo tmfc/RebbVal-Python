@@ -15,7 +15,7 @@ class RebbValHelper:
         return isinstance(value, list)
 
     @staticmethod
-    def is_number(value):
+    def is_numeric(value):
         if value is None:
             return False
 
@@ -31,7 +31,7 @@ class RebbValHelper:
 
     @staticmethod
     def parse_number( value):
-        if not RebbValHelper.is_number(value):
+        if not RebbValHelper.is_numeric(value):
             return None
         else:
             try:

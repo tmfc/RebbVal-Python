@@ -75,8 +75,8 @@ class EvalVisitor(RebbValVisitor):
         return RebbValHelper.is_list(value)
     
     @staticmethod
-    def __is_number(value):
-        return RebbValHelper.is_number(value)
+    def __is_numeric(value):
+        return RebbValHelper.is_numeric(value)
 
     @staticmethod
     def __parse_number(value):
@@ -184,7 +184,7 @@ class EvalVisitor(RebbValVisitor):
             array = []
             for tree in ctx.arrayLiteral().NumbericLiteral():
                 element = tree.getText()
-                if self.__is_number(element):
+                if self.__is_numeric(element):
                     element = self.__parse_number(element)
                 array.append(element)
 
@@ -200,7 +200,7 @@ class EvalVisitor(RebbValVisitor):
         result = False
         self.visit(ctx.expression())
         expr_value = self.__get_value(ctx.expression())
-        if self.__is_date(self.__obj) and self.__is_number(expr_value):
+        if self.__is_date(self.__obj) and self.__is_numeric(expr_value):
             birth = self.__obj
 
             now = datetime.now()
@@ -239,7 +239,7 @@ class EvalVisitor(RebbValVisitor):
                 self.__error = "Unsupported Operation"
 
             self.__set_value(ctx, result)
-        elif (self.__is_number(self.__obj) and self.__is_number(expr_value)) \
+        elif (self.__is_numeric(self.__obj) and self.__is_numeric(expr_value)) \
                 or (self.__is_date(self.__obj) and self.__is_date(expr_value)):
             result = self.__do_compare(self.__obj, expr_value, ctx.op.type)
             self.__set_value(ctx, result)
@@ -273,7 +273,7 @@ class EvalVisitor(RebbValVisitor):
         self.visit(ctx.expression(1))
         l_value = self.__get_value(ctx.expression(0))
         r_value = self.__get_value(ctx.expression(1))
-        if self.__is_number(self.__obj) and self.__is_number(l_value) and self.__is_number(r_value):
+        if self.__is_numeric(self.__obj) and self.__is_numeric(l_value) and self.__is_numeric(r_value):
             if l_value <= self.__obj <= r_value:
                 self.__set_value(ctx, True)
             else:
@@ -293,7 +293,7 @@ class EvalVisitor(RebbValVisitor):
         self.visit(ctx.expression(1))
         l_value = self.__get_value(ctx.expression(0))
         r_value = self.__get_value(ctx.expression(1))
-        if (self.__is_number(l_value) and self.__is_number(r_value) and self.__is_number(self.__obj)) \
+        if (self.__is_numeric(l_value) and self.__is_numeric(r_value) and self.__is_numeric(self.__obj)) \
                 or (self.__is_date(self.__obj) and self.__is_date(l_value) and self.__is_date(r_value)):
             result = self.__do_interval_compare(self.__obj, l_value, r_value, ctx.start.text, ctx.end.text)
             self.__set_value(ctx, result)
@@ -328,7 +328,7 @@ class EvalVisitor(RebbValVisitor):
         expr_value = self.__get_value(ctx.expression())
         if self.__is_string(self.__obj) and self.__is_string(expr_value):
             self.__set_value(ctx, self.__obj in expr_value)
-        elif self.__is_number(self.__obj) and self.__is_list(expr_value):
+        elif self.__is_numeric(self.__obj) and self.__is_list(expr_value):
             self.__set_value(ctx, self.__obj in expr_value)
         else:
             self.__set_value(ctx, False)
