@@ -25,6 +25,12 @@ class BuildInFunctions:
         self.__function_map[str(RebbValParser.UUID)] = self.check_uuid
         self.__function_map[str(RebbValParser.MAC)] = self.check_mac
         self.__function_map[str(RebbValParser.ID)] = self.check_id
+        self.__function_map[str(RebbValParser.DOMAIN)] = self.check_domain
+        self.__function_map[str(RebbValParser.EMAIL)] = self.check_email
+        self.__function_map[str(RebbValParser.IPV4)] = self.check_ipv4
+        self.__function_map[str(RebbValParser.IPV6)] = self.check_ipv6
+        self.__function_map[str(RebbValParser.PRIVATEIP)] = self.check_private_ip
+        self.__function_map[str(RebbValParser.URL)] = self.check_url
 
     def check(self, check_type, obj):
         return self.__function_map[str(check_type)](obj)
@@ -145,6 +151,42 @@ class BuildInFunctions:
 
     def check_mac(self, obj):
         regex = "^((?:[a-fA-F0-9]{2}[:-]){5}[a-fA-F0-9]{2})"
+        return self.__check_regex(obj, regex)
+
+    def check_domain(self, obj):
+        regex = r'^(?:(?:(?:[\w\-]*)(?:\.))?(?:[\w\-]*))\.(?:\w*)(?:\:(?:\d*))?$'
+        return self.__check_regex(obj, regex)
+
+    def check_email(self, obj):
+        regex = r'^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$'
+        return self.__check_regex(obj, regex)
+
+    def check_ipv4(self, obj):
+        regex = r'^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
+        return self.__check_regex(obj, regex)
+
+    def check_ipv6(self, obj):
+        regex = r'^([\da-fA-F]{1,4}(?::[\da-fA-F]{1,4}){7}|::|:(?::[\da-fA-F]{1,4}){1,6}|[\da-fA-F]{1,4}:(?::[\da-fA-F]{1,4}){1,5}|(?:[\da-fA-F]{1,4}:){2}(?::[\da-fA-F]{1,4}){1,4}|(?:[\da-fA-F]{1,4}:){3}(?::[\da-fA-F]{1,4}){1,3}|(?:[\da-fA-F]{1,4}:){4}(?::[\da-fA-F]{1,4}){1,2}|(?:[\da-fA-F]{1,4}:){5}:[\da-fA-F]{1,4}|(?:[\da-fA-F]{1,4}:){1,6}:)$'
+        return self.__check_regex(obj, regex)
+
+    def check_private_ip(self, obj):
+        if RebbValHelper.is_string(obj):
+            regex_ipv4 = r'^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$'
+            regex_ipv6 = r'^([\da-fA-F]{1,4}(?::[\da-fA-F]{1,4}){7}|::|:(?::[\da-fA-F]{1,4}){1,6}|[\da-fA-F]{1,4}:(?::[\da-fA-F]{1,4}){1,5}|(?:[\da-fA-F]{1,4}:){2}(?::[\da-fA-F]{1,4}){1,4}|(?:[\da-fA-F]{1,4}:){3}(?::[\da-fA-F]{1,4}){1,3}|(?:[\da-fA-F]{1,4}:){4}(?::[\da-fA-F]{1,4}){1,2}|(?:[\da-fA-F]{1,4}:){5}:[\da-fA-F]{1,4}|(?:[\da-fA-F]{1,4}:){1,6}:)$'
+
+            if self.__check_regex(obj, regex_ipv4):
+                regex_ipv4_private = r'^(10(\.(([0-9]?[0-9])|(1[0-9]?[0-9])|(2[0-4]?[0-9])|(25[0-5]))){3})|(172\.((1[6-9])|(2[0-9])(3[0-1]))(\.(([0-9]?[0-9])|(1[0-9]?[0-9])|(2[0-4]?[0-9])|(25[0-5]))){2})|(192\.168(\.(([0-9]?[0-9])|(1[0-9]?[0-9])|(2[0-4]?[0-9])|(25[0-5]))){2})|(127(\.(([0-9]?[0-9])|(1[0-9]?[0-9])|(2[0-4]?[0-9])|(25[0-5]))){3})$'
+                return self.__check_regex(obj, regex_ipv4_private)
+            elif self.__check_regex(obj, regex_ipv6):
+                return obj.startswith("FEC0:")
+            else:
+                return False
+        else:
+            self.error = "ObjectTypeNotString"
+            return False
+
+    def check_url(self, obj):
+        regex = r'^((https?:)(\/\/\/?)([\w]*(?::[\w]*)?@)?([\d\w\.-]+)(?::(\d+))?)?([\/\\\w\.()-]*)?(?:([?][^#]*)?(#.*)?)*$'
         return self.__check_regex(obj, regex)
 
     def __check_regex(self, obj, regex):
