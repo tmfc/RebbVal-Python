@@ -25,6 +25,8 @@ class RebbValHelper:
             is_number = num == num  # or use `math.isnan(num)`
         except ValueError:
             is_number = False
+        except TypeError:
+            is_number = False
         return is_number
 
     @staticmethod

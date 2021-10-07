@@ -1,3 +1,5 @@
+import calendar
+
 from rebbval.RebbValConfig import RebbValConfig
 from rebbval.RebbValHelper import RebbValHelper
 from rebbval.RebbValParser import RebbValParser
@@ -13,6 +15,8 @@ class BuildInFunctions:
     def __init_function_map(self):
         self.__function_map[str(RebbValParser.TRUE)] = self.check_true
         self.__function_map[str(RebbValParser.FALSE)] = self.check_false
+        self.__function_map[str(RebbValParser.LEAPYEAR)] = self.check_leap_year
+        self.__function_map[str(RebbValParser.LEAPDAY)] = self.check_leap_day
 
     def check(self, check_type, obj):
         return self.__function_map[str(check_type)](obj)
@@ -30,3 +34,19 @@ class BuildInFunctions:
 
     def check_false(self, obj):
         return not self.check_true(obj)
+
+    def check_leap_year(self, obj):
+        if RebbValHelper.is_date(obj):
+            return calendar.isleap(obj.year)
+        else:
+            self.error = "ObjectTypeNotDate"
+            return False
+
+    def check_leap_day(self, obj):
+        if RebbValHelper.is_date(obj):
+            return calendar.isleap(obj.year) and obj.month == 2 and obj.day == 29
+        else:
+            self.error = "ObjectTypeNotDate"
+            return False
+        
+    

@@ -195,6 +195,7 @@ class EvalVisitor(RebbValVisitor):
 
     # endregion
 
+    # region Compare
     def visitAgeCompare(self, ctx: RebbValParser.AgeCompareContext):
         result = False
         self.visit(ctx.expression())
@@ -226,6 +227,47 @@ class EvalVisitor(RebbValVisitor):
             self.__valid = False
             self.__error = "ObjectTypeNotSupported"
 
+    def visitCompare(self, ctx: RebbValParser.CompareContext):
+        result = False
+        self.visit(ctx.expression())
+        expr_value = self.__get_value(ctx.expression())
+        if self.__is_string(self.__obj) and self.__is_string(expr_value):
+            if ctx.op.type == RebbValParser.EQUAL:
+                result = self.__obj == expr_value
+            else:
+                result = False
+                self.__error = "Unsupported Operation"
+
+            self.__set_value(ctx, result)
+        elif (self.__is_number(self.__obj) and self.__is_number(expr_value)) \
+                or (self.__is_date(self.__obj) and self.__is_date(expr_value)):
+            result = self.__do_compare(self.__obj, expr_value, ctx.op.type)
+            self.__set_value(ctx, result)
+        else:
+            self.__set_value(ctx, False)
+            self.__error = "UnsupportedObjectType"
+
+    def __do_compare(self, obj, v, t):
+        result = False
+        if self.__is_date(obj):
+            obj = obj.timestamp()
+            v = v.timestamp()
+
+        if t == RebbValParser.EQUAL:
+            result = obj == v
+        elif t == RebbValParser.NEQUAL:
+            result = obj != v
+        elif t == RebbValParser.GT:
+            result = obj > v
+        elif t == RebbValParser.GTE:
+            result = obj >= v
+        elif t == RebbValParser.LT:
+            result = obj < v
+        elif t == RebbValParser.LTE:
+            result = obj <= v
+
+        return result
+
     def visitBetween(self, ctx: RebbValParser.BetweenContext):
         self.visit(ctx.expression(0))
         self.visit(ctx.expression(1))
@@ -245,6 +287,41 @@ class EvalVisitor(RebbValVisitor):
         else:
             self.__set_value(ctx, False)
             self.__error = "ObjectTypeNotSupported"
+
+    def visitInterval(self, ctx: RebbValParser.IntervalContext):
+        self.visit(ctx.expression(0))
+        self.visit(ctx.expression(1))
+        l_value = self.__get_value(ctx.expression(0))
+        r_value = self.__get_value(ctx.expression(1))
+        if (self.__is_number(l_value) and self.__is_number(r_value) and self.__is_number(self.__obj)) \
+                or (self.__is_date(self.__obj) and self.__is_date(l_value) and self.__is_date(r_value)):
+            result = self.__do_interval_compare(self.__obj, l_value, r_value, ctx.start.text, ctx.end.text)
+            self.__set_value(ctx, result)
+        else:
+            self.__set_value(ctx, False)
+            self.__error = "UnsupportedObjectType"
+
+    def __do_interval_compare(self, obj, l, r, start, end):
+        if self.__is_date(obj):
+            obj = obj.timestamp()
+            l = l.timestamp()
+            r = r.timestamp()
+
+        start_result = False
+        if start == "(" or start == "]":
+            start_result = obj > l
+        if start == "[":
+            start_result = obj >= l
+
+        end_result = False
+        if start_result:
+            if end == ")" or end == "[":
+                end_result = obj < r
+            if end == "]":
+                end_result = obj <= r;
+
+        return start_result and end_result
+    # endregion
 
     def visitIn(self, ctx: RebbValParser.InContext):
         self.visit(ctx.expression())
