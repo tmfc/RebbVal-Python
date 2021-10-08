@@ -1,3 +1,4 @@
+import re
 from datetime import timezone, datetime, time
 from dateutil.relativedelta import relativedelta
 
@@ -159,7 +160,7 @@ class EvalVisitor(RebbValVisitor):
     def visitString(self, ctx: RebbValParser.StringContext):
         str_value = ctx.StringLiteral().getText()
         if str_value is not None:
-            self.__set_value(ctx, str_value.substring(1, str_value.length() -1))
+            self.__set_value(ctx, str_value[1:len(str_value) - 1])
 
     # Number 
     def visitNumber(self, ctx: RebbValParser.NumberContext):
@@ -323,6 +324,7 @@ class EvalVisitor(RebbValVisitor):
         return start_result and end_result
     # endregion
 
+    # region Contain/In
     def visitIn(self, ctx: RebbValParser.InContext):
         self.visit(ctx.expression())
         expr_value = self.__get_value(ctx.expression())
@@ -346,7 +348,61 @@ class EvalVisitor(RebbValVisitor):
             self.__set_value(ctx, False)
             self.__error = "ObjectTypeNotSupported"
 
+    def visitStringPosition(self, ctx: RebbValParser.StringPositionContext):
+        expr_context = ctx.expression()
+        self.visit(expr_context)
+        expr_value = self.__get_value(expr_context)
+        if self.__is_string(self.__obj) and self.__is_string(expr_value):
+            result = False
+            length = len(expr_value)
+            if ctx.op.text == "starts":
+                result = self.__obj[0:length] == expr_value
+            elif ctx.op.text == "ends":
+                result = self.__obj[-length:] == expr_value
+            self.__set_value(ctx, result)
+        else:
+            self.__set_value(ctx, False)
+            self.__error = "ObjectTypeNotSupported"
+    # endregion
+
+    # region string
+    def visitNotEmpty(self, ctx: RebbValParser.NotEmptyContext):
+        if self.__is_string(self.__obj):
+            self.__set_value(ctx, not(self.__obj is None or self.__obj == ""))
+        else:
+            self.__set_value(ctx, False)
+            self.__error = "ObjectTypeNotSupported"
+
+    def visitMaxLength(self, ctx: RebbValParser.MaxLengthContext):
+        expr_value = int(ctx.NumbericLiteral().getText())
+        if self.__is_string(self.__obj):
+            if len(self.__obj) <= expr_value:
+                self.__set_value(ctx, True)
+            else:
+                self.__set_value(ctx, False)
+        else:
+            self.__set_value(ctx, False)
+            self.__error = "ObjectTypeNotSupported"
+
+    def visitMatch(self, ctx: RebbValParser.MatchContext):
+        if self.__is_string(self.__obj):
+            expr_value = ctx.regex.text
+            regex = expr_value.replace('/', '')
+            p = re.compile(regex)
+            m = p.search(self.__obj)
+            if m is not None:
+                self.__set_value(ctx, True)
+            else:
+                self.__set_value(ctx, False)
+        else:
+            self.__set_value(ctx, False)
+            self.__error = "ObjectTypeNotSupported"
+    # endregion
+
     def visitIs(self, ctx: RebbValParser.IsContext):
         b = BuildInFunctions(self.__config)
-        # result = False
         self.__set_value(ctx, b.check(ctx.is_type.type, self.__obj))
+
+    def visitIsHex(self, ctx: RebbValParser.IsHexContext):
+        b = BuildInFunctions(self.__config)
+        self.__set_value(ctx, b.check_hex(ctx.is_type.type, self.__obj))

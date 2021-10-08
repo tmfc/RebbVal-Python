@@ -10,206 +10,202 @@ class NumberTest(unittest.TestCase):
         
         # double
         self.assertTrue(v.val(10.0, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
         self.assertFalse(v.val(8.8, condition))
-        self.assertEquals(1, len(v.errors))
-        self.assertEquals("8.8 between 10 and 20 failed", v.errors[0])
+        self.assertEqual(1, len(v.errors))
+        self.assertEqual("8.8 between 10 and 20 failed", v.errors[0])
 
         # float
         self.assertTrue(v.val(10.0, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
         # integer
         self.assertTrue(v.val(10, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
         # long
         self.assertTrue(v.val(10, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
-    def testNumberInterval(self):
+    def test_number_interval(self):
         v = RebbVal()
         condition = "[5..20]"
 
         # double
         self.assertTrue(v.val(10.0, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
         self.assertFalse(v.val(0.8, condition))
-        self.assertEquals(1, len(v.errors))
-        self.assertEquals("0.8 [5..20] failed", v.errors[0])
+        self.assertEqual(1, len(v.errors))
+        self.assertEqual("0.8 [5..20] failed", v.errors[0])
 
         self.assertTrue(v.val(5.1, "(5..20]"))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
         self.assertFalse(v.val(5, "(5..20]"))
-        self.assertEquals(1, len(v.errors))
-        self.assertEquals("5 (5..20] failed", v.errors[0])
+        self.assertEqual(1, len(v.errors))
+        self.assertEqual("5 (5..20] failed", v.errors[0])
 
         self.assertFalse(v.val(20, "[5..20)"))
-        self.assertEquals(1, len(v.errors))
-        self.assertEquals("20 [5..20) failed", v.errors[0])
+        self.assertEqual(1, len(v.errors))
+        self.assertEqual("20 [5..20) failed", v.errors[0])
 
         # float
         self.assertTrue(v.val(10.0, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
         # integer
         self.assertTrue(v.val(10, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
         # long
         self.assertTrue(v.val(10, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
-    def testNumberEqual(self):
+    def test_number_equal(self):
         v = RebbVal()
         condition = "=10"
 
         # double
         self.assertTrue(v.val(10.0, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
         self.assertFalse(v.val(8.8, condition))
-        self.assertEquals(1, len(v.errors))
-        self.assertEquals("8.8 =10 failed", v.errors[0])
+        self.assertEqual(1, len(v.errors))
+        self.assertEqual("8.8 =10 failed", v.errors[0])
 
         # float
         self.assertTrue(v.val(10.0, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
         # integer
         self.assertTrue(v.val(10, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
         # long
         self.assertTrue(v.val(10, condition))
-        self.assertEquals(0, len(v.errors))
-    
+        self.assertEqual(0, len(v.errors))
 
-
-    def testNumberNotEqual(self):
+    def test_number_not_equal(self):
         v = RebbVal()
         condition = "!=10"
 
         # double
         self.assertTrue(v.val(100.0, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
         self.assertFalse(v.val(10, condition))
-        self.assertEquals(1, len(v.errors))
-        self.assertEquals("10 !=10 failed", v.errors[0])
+        self.assertEqual(1, len(v.errors))
+        self.assertEqual("10 !=10 failed", v.errors[0])
 
         # float
         self.assertTrue(v.val(100.0, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
         # integer
         self.assertTrue(v.val(100, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
         # long
         self.assertTrue(v.val(100, condition))
-        self.assertEquals(0, len(v.errors))
-    
+        self.assertEqual(0, len(v.errors))
 
-
-    def testNumberLT(self):
+    def test_number_lt(self):
         v = RebbVal()
         condition = "<100"
 
         # double
         self.assertTrue(v.val(10.0, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
         self.assertFalse(v.val(188.8, condition))
-        self.assertEquals(1, len(v.errors))
-        self.assertEquals("188.8 <100 failed", v.errors[0])
+        self.assertEqual(1, len(v.errors))
+        self.assertEqual("188.8 <100 failed", v.errors[0])
 
         # float
         self.assertTrue(v.val(10.0, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
         # integer
         self.assertTrue(v.val(10, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
         # long
         self.assertTrue(v.val(10, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
-    def testNumberLTE(self):
+    def test_number_lte(self):
         v = RebbVal()
         condition = "<=100"
 
         # double
         self.assertTrue(v.val(10.0, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
         self.assertFalse(v.val(188.8, condition))
-        self.assertEquals(1, len(v.errors))
-        self.assertEquals("188.8 <=100 failed", v.errors[0])
+        self.assertEqual(1, len(v.errors))
+        self.assertEqual("188.8 <=100 failed", v.errors[0])
 
         # float
         self.assertTrue(v.val(10.0, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
         # integer
         self.assertTrue(v.val(10, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
         # long
         self.assertTrue(v.val(10, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
-    def testNumberGT(self):
+    def test_number_gt(self):
         v = RebbVal()
         condition = ">1"
 
         # double
         self.assertTrue(v.val(10.0, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
         self.assertFalse(v.val(0.8, condition))
-        self.assertEquals(1, len(v.errors))
-        self.assertEquals("0.8 >1 failed", v.errors[0])
+        self.assertEqual(1, len(v.errors))
+        self.assertEqual("0.8 >1 failed", v.errors[0])
 
         # float
         self.assertTrue(v.val(10.0, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
         # integer
         self.assertTrue(v.val(10, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
         # long
         self.assertTrue(v.val(10, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
-    def testNumberGTE(self):
+    def test_number_gte(self):
         v = RebbVal()
         condition = ">=10"
 
         # double
         self.assertTrue(v.val(10.0, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
         self.assertFalse(v.val(8.8, condition))
-        self.assertEquals(1, len(v.errors))
-        self.assertEquals("8.8 >=10 failed", v.errors[0])
+        self.assertEqual(1, len(v.errors))
+        self.assertEqual("8.8 >=10 failed", v.errors[0])
 
         # float
         self.assertTrue(v.val(10.0, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
         # integer
         self.assertTrue(v.val(10, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
 
         # long
         self.assertTrue(v.val(10, condition))
-        self.assertEquals(0, len(v.errors))
+        self.assertEqual(0, len(v.errors))
     
 
 if __name__ == '__main__':

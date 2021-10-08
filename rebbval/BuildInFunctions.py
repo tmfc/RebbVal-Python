@@ -33,9 +33,21 @@ class BuildInFunctions:
         self.__function_map[str(RebbValParser.PRIVATEIP)] = self.check_private_ip
         self.__function_map[str(RebbValParser.URL)] = self.check_url
         self.__function_map[str(RebbValParser.GBCODE)] = self.check_gb_code
+        self.__function_map[str(RebbValParser.PHONE)] = self.check_phone
+        self.__function_map[str(RebbValParser.MOBILE)] = self.check_mobile
+        self.__function_map[str(RebbValParser.BASE64)] = self.check_base64
+        self.__function_map[str(RebbValParser.PERCENTAGE)] = self.check_percentage
+        self.__function_map[str(RebbValParser.NUMBER)] = self.check_number
+        self.__function_map[str(RebbValParser.INT)] = self.check_int
+        self.__function_map[str(RebbValParser.FLOAT)] = self.check_float
+        self.__function_map["HEX" + str(RebbValParser.COLOR)] = self.check_hex_color
+        self.__function_map["HEX" + str(RebbValParser.NUMBER)] = self.check_hex_number
 
     def check(self, check_type, obj):
         return self.__function_map[str(check_type)](obj)
+
+    def check_hex(self, check_type, obj):
+        return self.__function_map["HEX" + str(check_type)](obj)
 
     def check_true(self, obj):
         if isinstance(obj, bool):
@@ -198,6 +210,42 @@ class BuildInFunctions:
             return int(obj) in self.gbcodes
         else:
             return False
+
+    def check_phone(self, obj):
+        regex = r"^(0\d{2}-\d{8}(-\d{1,4})?)|(0\d{3}-\d{7,8}(-\d{1,4})?)$"
+        return self.__check_regex(obj, regex)
+
+    def check_mobile(self, obj):
+        regex = r"^1[3-9]\d{9}$"
+        return self.__check_regex(obj, regex)
+
+    def check_percentage(self, obj):
+        regex = r"^-?[1][0][0](\.[0]{0,2})?%$|^-?[1-9]?[0-9](\.[0-9]{0,2})?%$"
+        return self.__check_regex(obj, regex)
+
+    def check_base64(self, obj):
+        regex = r"^(?:([a-z0-9A-Z+\/]){4})*([a-z0-9A-Z+\/])(?:([a-z0-9A-Z+\/])==|([a-z0-9A-Z+\/]){2}=|([a-z0-9A-Z+\/]){3})$"
+        return self.__check_regex(obj, regex)
+
+    def check_number(self, obj):
+        regex = r"^(?<![\w.])[+-]?(?:\d+\.\d+|\d+\.|\.\d+|\d+)(?:[eE][+-]?\d+)?(?![\w.])$"
+        return self.__check_regex(obj, regex)
+
+    def check_int(self, obj):
+        regex = r"^[-+]?\d+$"
+        return self.__check_regex(obj, regex)
+
+    def check_float(self, obj):
+        regex = r"^(?<![\w.])[+-]?(?:\d+\.\d+|\d+\.|\.\d+)(?![\w.])$"
+        return self.__check_regex(obj, regex)
+
+    def check_hex_color(self, obj):
+        regex = r"^#(([\da-fA-F]{3}){1,2}|([\da-fA-F]{4}){1,2})$"
+        return self.__check_regex(obj, regex)
+
+    def check_hex_number(self, obj):
+        regex = r"^(?:0[xX])?[\da-fA-F]+$"
+        return self.__check_regex(obj, regex)
 
     def __check_regex(self, obj, regex):
         if RebbValHelper.is_string(obj):
