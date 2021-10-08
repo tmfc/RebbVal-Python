@@ -19,7 +19,10 @@ class StringTest(unittest.TestCase):
     def testStringPosition(self):
         v = RebbVal()
         self.assertTrue(v.val("This string", "starts with 'This'"))
+        self.assertFalse(v.val("That string", "starts with 'This'"))
         self.assertTrue(v.val("This string", "ends with 'string'"))
+        self.assertFalse(v.val("This string", "ends with 'foobar'"))
+        self.assertFalse(v.val("This string", "starts with 'This very long string'"))
         self.assertFalse(v.val("This string", "ends with 'a very long string'"))
 
     def testStringIn(self):
