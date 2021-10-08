@@ -64,7 +64,8 @@ class RebbVal:
 
             if self.engine.get_error() is not None and self.engine.get_error() != "":
                 error_message = error_message + "(" + self.engine.get_error() + ")"
-                self.errors.append(error_message)
+
+            self.errors.append(error_message)
             return False
 
         return True
