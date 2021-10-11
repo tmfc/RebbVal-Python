@@ -108,7 +108,7 @@ class EvalVisitor(RebbValVisitor):
         unary_ctx_0 = ctx.unaryTests()
         unary_ctx_1 = ctx.unaryTest()
         self.visit(unary_ctx_0)
-        self.visit(unary_ctx_0)
+        self.visit(unary_ctx_1)
         if self.__is_bool(self.__get_value(unary_ctx_0)) \
                 and self.__is_bool(self.__get_value(unary_ctx_1)):
             value_0 = self.__get_value(unary_ctx_0)
