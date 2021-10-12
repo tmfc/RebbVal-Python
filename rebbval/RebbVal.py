@@ -70,3 +70,6 @@ class RebbVal:
 
         return True
 
+    def register_custom_validator(self, name, func):
+        return self.engine.register_custom_validator(name, func)
+

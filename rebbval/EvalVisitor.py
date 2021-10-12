@@ -406,3 +406,21 @@ class EvalVisitor(RebbValVisitor):
     def visitIsHex(self, ctx: RebbValParser.IsHexContext):
         b = BuildInFunctions(self.__config)
         self.__set_value(ctx, b.check_hex(ctx.is_type.type, self.__obj))
+
+    def visitIsCustom(self, ctx: RebbValParser.IsCustomContext):
+        key = ctx.is_type.text
+        if key in self.__custom_functions:
+            f = self.__custom_functions[key]
+            try:
+                if f(self.__obj):
+                    self.__set_value(ctx, True)
+                else:
+                    self.__set_value(ctx, False)
+            except Exception as ex:
+                self.__set_value(ctx, False)
+                self.__error = str(ex)
+        else:
+            self.__set_value(ctx, False)
+
+    def register_custom_validator(self, name, func):
+        self.__custom_functions[name] = func
