@@ -134,6 +134,15 @@ class RebbValListener(ParseTreeListener):
         pass
 
 
+    # Enter a parse tree produced by RebbValParser#ArrayIsUnique.
+    def enterArrayIsUnique(self, ctx:RebbValParser.ArrayIsUniqueContext):
+        pass
+
+    # Exit a parse tree produced by RebbValParser#ArrayIsUnique.
+    def exitArrayIsUnique(self, ctx:RebbValParser.ArrayIsUniqueContext):
+        pass
+
+
     # Enter a parse tree produced by RebbValParser#IsHex.
     def enterIsHex(self, ctx:RebbValParser.IsHexContext):
         pass

@@ -79,6 +79,11 @@ class RebbValVisitor(ParseTreeVisitor):
         return self.visitChildren(ctx)
 
 
+    # Visit a parse tree produced by RebbValParser#ArrayIsUnique.
+    def visitArrayIsUnique(self, ctx:RebbValParser.ArrayIsUniqueContext):
+        return self.visitChildren(ctx)
+
+
     # Visit a parse tree produced by RebbValParser#IsHex.
     def visitIsHex(self, ctx:RebbValParser.IsHexContext):
         return self.visitChildren(ctx)

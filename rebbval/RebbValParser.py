@@ -11,41 +11,41 @@ else:
 
 def serializedATN():
     with StringIO() as buf:
-        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3J")
-        buf.write("`\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\3\2\3\2")
+        buf.write("\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3K")
+        buf.write("b\4\2\t\2\4\3\t\3\4\4\t\4\4\5\t\5\4\6\t\6\3\2\3\2\3\2")
         buf.write("\3\2\3\2\3\2\3\2\3\2\3\2\7\2\26\n\2\f\2\16\2\31\13\2\3")
         buf.write("\3\3\3\3\3\5\3\36\n\3\3\3\3\3\5\3\"\n\3\3\3\5\3%\n\3\3")
         buf.write("\4\3\4\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5")
         buf.write("\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3")
         buf.write("\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5\3\5")
-        buf.write("\3\5\3\5\3\5\5\5S\n\5\3\6\3\6\3\6\3\6\7\6Y\n\6\f\6\16")
-        buf.write("\6\\\13\6\3\6\3\6\3\6\2\3\2\7\2\4\6\b\n\2\t\3\2&+\4\2")
-        buf.write(".@BG\4\2>>AA\3\2,-\3\2\23\24\4\2\6\6\26\27\4\2\7\7\26")
-        buf.write("\27\2r\2\f\3\2\2\2\4$\3\2\2\2\6&\3\2\2\2\bR\3\2\2\2\n")
-        buf.write("T\3\2\2\2\f\r\b\2\1\2\r\16\5\4\3\2\16\27\3\2\2\2\17\20")
-        buf.write("\f\5\2\2\20\21\7\3\2\2\21\26\5\4\3\2\22\23\f\4\2\2\23")
-        buf.write("\24\7\4\2\2\24\26\5\4\3\2\25\17\3\2\2\2\25\22\3\2\2\2")
-        buf.write("\26\31\3\2\2\2\27\25\3\2\2\2\27\30\3\2\2\2\30\3\3\2\2")
-        buf.write("\2\31\27\3\2\2\2\32%\5\6\4\2\33\35\7\5\2\2\34\36\7\6\2")
-        buf.write("\2\35\34\3\2\2\2\35\36\3\2\2\2\36\37\3\2\2\2\37!\5\6\4")
-        buf.write("\2 \"\7\7\2\2! \3\2\2\2!\"\3\2\2\2\"%\3\2\2\2#%\7\b\2")
-        buf.write("\2$\32\3\2\2\2$\33\3\2\2\2$#\3\2\2\2%\5\3\2\2\2&\'\5\b")
-        buf.write("\5\2\'\7\3\2\2\2()\t\2\2\2)S\5\b\5\2*+\7\t\2\2+,\5\b\5")
-        buf.write("\2,-\7\3\2\2-.\5\b\5\2.S\3\2\2\2/\60\7\n\2\2\60S\5\b\5")
-        buf.write("\2\61\62\7\13\2\2\62S\5\b\5\2\63\64\7\5\2\2\64S\7\f\2")
-        buf.write("\2\65\66\7\r\2\2\66\67\7\16\2\2\67S\7\34\2\289\7\17\2")
-        buf.write("\29S\t\3\2\2:;\7\17\2\2;<\7\20\2\2<S\t\4\2\2=>\7\17\2")
-        buf.write("\2>S\7H\2\2?@\7\21\2\2@S\7\32\2\2AB\t\5\2\2BC\7\22\2\2")
-        buf.write("CS\5\b\5\2DE\t\6\2\2EF\7\25\2\2FS\5\b\5\2GH\t\7\2\2HI")
-        buf.write("\5\b\5\2IJ\7\30\2\2JK\5\b\5\2KL\t\b\2\2LS\3\2\2\2MS\5")
-        buf.write("\n\6\2NS\7\33\2\2OS\7\34\2\2PS\7\35\2\2QS\7\36\2\2R(\3")
-        buf.write("\2\2\2R*\3\2\2\2R/\3\2\2\2R\61\3\2\2\2R\63\3\2\2\2R\65")
-        buf.write("\3\2\2\2R8\3\2\2\2R:\3\2\2\2R=\3\2\2\2R?\3\2\2\2RA\3\2")
-        buf.write("\2\2RD\3\2\2\2RG\3\2\2\2RM\3\2\2\2RN\3\2\2\2RO\3\2\2\2")
-        buf.write("RP\3\2\2\2RQ\3\2\2\2S\t\3\2\2\2TU\7\27\2\2UZ\7\34\2\2")
-        buf.write("VW\7\31\2\2WY\7\34\2\2XV\3\2\2\2Y\\\3\2\2\2ZX\3\2\2\2")
-        buf.write("Z[\3\2\2\2[]\3\2\2\2\\Z\3\2\2\2]^\7\26\2\2^\13\3\2\2\2")
-        buf.write("\t\25\27\35!$RZ")
+        buf.write("\3\5\3\5\3\5\3\5\3\5\5\5U\n\5\3\6\3\6\3\6\3\6\7\6[\n\6")
+        buf.write("\f\6\16\6^\13\6\3\6\3\6\3\6\2\3\2\7\2\4\6\b\n\2\t\3\2")
+        buf.write("\',\4\2/ACH\4\2??BB\3\2-.\3\2\24\25\4\2\6\6\27\30\4\2")
+        buf.write("\7\7\27\30\2u\2\f\3\2\2\2\4$\3\2\2\2\6&\3\2\2\2\bT\3\2")
+        buf.write("\2\2\nV\3\2\2\2\f\r\b\2\1\2\r\16\5\4\3\2\16\27\3\2\2\2")
+        buf.write("\17\20\f\5\2\2\20\21\7\3\2\2\21\26\5\4\3\2\22\23\f\4\2")
+        buf.write("\2\23\24\7\4\2\2\24\26\5\4\3\2\25\17\3\2\2\2\25\22\3\2")
+        buf.write("\2\2\26\31\3\2\2\2\27\25\3\2\2\2\27\30\3\2\2\2\30\3\3")
+        buf.write("\2\2\2\31\27\3\2\2\2\32%\5\6\4\2\33\35\7\5\2\2\34\36\7")
+        buf.write("\6\2\2\35\34\3\2\2\2\35\36\3\2\2\2\36\37\3\2\2\2\37!\5")
+        buf.write("\6\4\2 \"\7\7\2\2! \3\2\2\2!\"\3\2\2\2\"%\3\2\2\2#%\7")
+        buf.write("\b\2\2$\32\3\2\2\2$\33\3\2\2\2$#\3\2\2\2%\5\3\2\2\2&\'")
+        buf.write("\5\b\5\2\'\7\3\2\2\2()\t\2\2\2)U\5\b\5\2*+\7\t\2\2+,\5")
+        buf.write("\b\5\2,-\7\3\2\2-.\5\b\5\2.U\3\2\2\2/\60\7\n\2\2\60U\5")
+        buf.write("\b\5\2\61\62\7\13\2\2\62U\5\b\5\2\63\64\7\5\2\2\64U\7")
+        buf.write("\f\2\2\65\66\7\r\2\2\66\67\7\16\2\2\67U\7\35\2\289\7\17")
+        buf.write("\2\29U\t\3\2\2:;\7\17\2\2;U\7\20\2\2<=\7\17\2\2=>\7\21")
+        buf.write("\2\2>U\t\4\2\2?@\7\17\2\2@U\7I\2\2AB\7\22\2\2BU\7\33\2")
+        buf.write("\2CD\t\5\2\2DE\7\23\2\2EU\5\b\5\2FG\t\6\2\2GH\7\26\2\2")
+        buf.write("HU\5\b\5\2IJ\t\7\2\2JK\5\b\5\2KL\7\31\2\2LM\5\b\5\2MN")
+        buf.write("\t\b\2\2NU\3\2\2\2OU\5\n\6\2PU\7\34\2\2QU\7\35\2\2RU\7")
+        buf.write("\36\2\2SU\7\37\2\2T(\3\2\2\2T*\3\2\2\2T/\3\2\2\2T\61\3")
+        buf.write("\2\2\2T\63\3\2\2\2T\65\3\2\2\2T8\3\2\2\2T:\3\2\2\2T<\3")
+        buf.write("\2\2\2T?\3\2\2\2TA\3\2\2\2TC\3\2\2\2TF\3\2\2\2TI\3\2\2")
+        buf.write("\2TO\3\2\2\2TP\3\2\2\2TQ\3\2\2\2TR\3\2\2\2TS\3\2\2\2U")
+        buf.write("\t\3\2\2\2VW\7\30\2\2W\\\7\35\2\2XY\7\32\2\2Y[\7\35\2")
+        buf.write("\2ZX\3\2\2\2[^\3\2\2\2\\Z\3\2\2\2\\]\3\2\2\2]_\3\2\2\2")
+        buf.write("^\\\3\2\2\2_`\7\27\2\2`\13\3\2\2\2\t\25\27\35!$T\\")
         return buf.getvalue()
 
 
@@ -61,18 +61,18 @@ class RebbValParser ( Parser ):
 
     literalNames = [ "<INVALID>", "'and'", "'or'", "'not'", "'('", "')'", 
                      "'-'", "'between'", "'in'", "'contains'", "'empty'", 
-                     "'max'", "'length'", "'is'", "'hex'", "'match'", "'than'", 
-                     "'starts'", "'ends'", "'with'", "']'", "'['", "'..'", 
-                     "','", "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
+                     "'max'", "'length'", "'is'", "'unique'", "'hex'", "'match'", 
+                     "'than'", "'starts'", "'ends'", "'with'", "']'", "'['", 
+                     "'..'", "','", "<INVALID>", "<INVALID>", "<INVALID>", 
                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                      "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                     "'='", "'!='", "'<'", "'<='", "'>'", "'>='", "'older'", 
-                     "'younger'", "'true'", "'false'", "'leapyear'", "'leapday'", 
-                     "'domain'", "'email'", "'ipv4'", "'ipv6'", "'private_ip'", 
-                     "'url'", "'MAC'", "'IMEI'", "'IMEISV'", "'ISBN'", "'percentage'", 
-                     "'base64'", "'number'", "'int'", "'float'", "'color'", 
-                     "'phone'", "'mobile'", "'UUID'", "'gbcode'", "'ID'", 
-                     "'passport'" ]
+                     "<INVALID>", "'='", "'!='", "'<'", "'<='", "'>'", "'>='", 
+                     "'older'", "'younger'", "'true'", "'false'", "'leapyear'", 
+                     "'leapday'", "'domain'", "'email'", "'ipv4'", "'ipv6'", 
+                     "'private_ip'", "'url'", "'MAC'", "'IMEI'", "'IMEISV'", 
+                     "'ISBN'", "'percentage'", "'base64'", "'number'", "'int'", 
+                     "'float'", "'color'", "'phone'", "'mobile'", "'UUID'", 
+                     "'gbcode'", "'ID'", "'passport'" ]
 
     symbolicNames = [ "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
@@ -80,16 +80,16 @@ class RebbValParser ( Parser ):
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
                       "<INVALID>", "<INVALID>", "<INVALID>", "<INVALID>", 
-                      "RegularExpressionLiteral", "StringLiteral", "NumbericLiteral", 
-                      "DateLiteral", "TimeLiteral", "DIGITS", "YEAR", "MONTH", 
-                      "DAY", "HOUR", "MINUTE", "SECOND", "EQUAL", "NEQUAL", 
-                      "LT", "LTE", "GT", "GTE", "OLDER", "YOUNGER", "TRUE", 
-                      "FALSE", "LEAPYEAR", "LEAPDAY", "DOMAIN", "EMAIL", 
-                      "IPV4", "IPV6", "PRIVATEIP", "URL", "MAC", "IMEI", 
-                      "IMEISV", "ISBN", "PERCENTAGE", "BASE64", "NUMBER", 
-                      "INT", "FLOAT", "COLOR", "PHONE", "MOBILE", "UUID", 
-                      "GBCODE", "ID", "PASSPORT", "CustomFunction", "NEWLINE", 
-                      "WS" ]
+                      "<INVALID>", "RegularExpressionLiteral", "StringLiteral", 
+                      "NumbericLiteral", "DateLiteral", "TimeLiteral", "DIGITS", 
+                      "YEAR", "MONTH", "DAY", "HOUR", "MINUTE", "SECOND", 
+                      "EQUAL", "NEQUAL", "LT", "LTE", "GT", "GTE", "OLDER", 
+                      "YOUNGER", "TRUE", "FALSE", "LEAPYEAR", "LEAPDAY", 
+                      "DOMAIN", "EMAIL", "IPV4", "IPV6", "PRIVATEIP", "URL", 
+                      "MAC", "IMEI", "IMEISV", "ISBN", "PERCENTAGE", "BASE64", 
+                      "NUMBER", "INT", "FLOAT", "COLOR", "PHONE", "MOBILE", 
+                      "UUID", "GBCODE", "ID", "PASSPORT", "CustomFunction", 
+                      "NEWLINE", "WS" ]
 
     RULE_unaryTests = 0
     RULE_unaryTest = 1
@@ -124,55 +124,56 @@ class RebbValParser ( Parser ):
     T__20=21
     T__21=22
     T__22=23
-    RegularExpressionLiteral=24
-    StringLiteral=25
-    NumbericLiteral=26
-    DateLiteral=27
-    TimeLiteral=28
-    DIGITS=29
-    YEAR=30
-    MONTH=31
-    DAY=32
-    HOUR=33
-    MINUTE=34
-    SECOND=35
-    EQUAL=36
-    NEQUAL=37
-    LT=38
-    LTE=39
-    GT=40
-    GTE=41
-    OLDER=42
-    YOUNGER=43
-    TRUE=44
-    FALSE=45
-    LEAPYEAR=46
-    LEAPDAY=47
-    DOMAIN=48
-    EMAIL=49
-    IPV4=50
-    IPV6=51
-    PRIVATEIP=52
-    URL=53
-    MAC=54
-    IMEI=55
-    IMEISV=56
-    ISBN=57
-    PERCENTAGE=58
-    BASE64=59
-    NUMBER=60
-    INT=61
-    FLOAT=62
-    COLOR=63
-    PHONE=64
-    MOBILE=65
-    UUID=66
-    GBCODE=67
-    ID=68
-    PASSPORT=69
-    CustomFunction=70
-    NEWLINE=71
-    WS=72
+    T__23=24
+    RegularExpressionLiteral=25
+    StringLiteral=26
+    NumbericLiteral=27
+    DateLiteral=28
+    TimeLiteral=29
+    DIGITS=30
+    YEAR=31
+    MONTH=32
+    DAY=33
+    HOUR=34
+    MINUTE=35
+    SECOND=36
+    EQUAL=37
+    NEQUAL=38
+    LT=39
+    LTE=40
+    GT=41
+    GTE=42
+    OLDER=43
+    YOUNGER=44
+    TRUE=45
+    FALSE=46
+    LEAPYEAR=47
+    LEAPDAY=48
+    DOMAIN=49
+    EMAIL=50
+    IPV4=51
+    IPV6=52
+    PRIVATEIP=53
+    URL=54
+    MAC=55
+    IMEI=56
+    IMEISV=57
+    ISBN=58
+    PERCENTAGE=59
+    BASE64=60
+    NUMBER=61
+    INT=62
+    FLOAT=63
+    COLOR=64
+    PHONE=65
+    MOBILE=66
+    UUID=67
+    GBCODE=68
+    ID=69
+    PASSPORT=70
+    CustomFunction=71
+    NEWLINE=72
+    WS=73
 
     def __init__(self, input:TokenStream, output:TextIO = sys.stdout):
         super().__init__(input, output)
@@ -659,6 +660,28 @@ class RebbValParser ( Parser ):
                 return visitor.visitChildren(self)
 
 
+    class ArrayIsUniqueContext(ExpressionContext):
+
+        def __init__(self, parser, ctx:ParserRuleContext): # actually a RebbValParser.ExpressionContext
+            super().__init__(parser)
+            self.copyFrom(ctx)
+
+
+        def enterRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "enterArrayIsUnique" ):
+                listener.enterArrayIsUnique(self)
+
+        def exitRule(self, listener:ParseTreeListener):
+            if hasattr( listener, "exitArrayIsUnique" ):
+                listener.exitArrayIsUnique(self)
+
+        def accept(self, visitor:ParseTreeVisitor):
+            if hasattr( visitor, "visitArrayIsUnique" ):
+                return visitor.visitArrayIsUnique(self)
+            else:
+                return visitor.visitChildren(self)
+
+
     class IsCustomContext(ExpressionContext):
 
         def __init__(self, parser, ctx:ParserRuleContext): # actually a RebbValParser.ExpressionContext
@@ -1082,7 +1105,7 @@ class RebbValParser ( Parser ):
         self.enterRule(localctx, 6, self.RULE_expression)
         self._la = 0 # Token type
         try:
-            self.state = 80
+            self.state = 82
             self._errHandler.sync(self)
             la_ = self._interp.adaptivePredict(self._input,5,self._ctx)
             if la_ == 1:
@@ -1159,7 +1182,7 @@ class RebbValParser ( Parser ):
                 self.state = 55
                 localctx.is_type = self._input.LT(1)
                 _la = self._input.LA(1)
-                if not(((((_la - 44)) & ~0x3f) == 0 and ((1 << (_la - 44)) & ((1 << (RebbValParser.TRUE - 44)) | (1 << (RebbValParser.FALSE - 44)) | (1 << (RebbValParser.LEAPYEAR - 44)) | (1 << (RebbValParser.LEAPDAY - 44)) | (1 << (RebbValParser.DOMAIN - 44)) | (1 << (RebbValParser.EMAIL - 44)) | (1 << (RebbValParser.IPV4 - 44)) | (1 << (RebbValParser.IPV6 - 44)) | (1 << (RebbValParser.PRIVATEIP - 44)) | (1 << (RebbValParser.URL - 44)) | (1 << (RebbValParser.MAC - 44)) | (1 << (RebbValParser.IMEI - 44)) | (1 << (RebbValParser.IMEISV - 44)) | (1 << (RebbValParser.ISBN - 44)) | (1 << (RebbValParser.PERCENTAGE - 44)) | (1 << (RebbValParser.BASE64 - 44)) | (1 << (RebbValParser.NUMBER - 44)) | (1 << (RebbValParser.INT - 44)) | (1 << (RebbValParser.FLOAT - 44)) | (1 << (RebbValParser.PHONE - 44)) | (1 << (RebbValParser.MOBILE - 44)) | (1 << (RebbValParser.UUID - 44)) | (1 << (RebbValParser.GBCODE - 44)) | (1 << (RebbValParser.ID - 44)) | (1 << (RebbValParser.PASSPORT - 44)))) != 0)):
+                if not(((((_la - 45)) & ~0x3f) == 0 and ((1 << (_la - 45)) & ((1 << (RebbValParser.TRUE - 45)) | (1 << (RebbValParser.FALSE - 45)) | (1 << (RebbValParser.LEAPYEAR - 45)) | (1 << (RebbValParser.LEAPDAY - 45)) | (1 << (RebbValParser.DOMAIN - 45)) | (1 << (RebbValParser.EMAIL - 45)) | (1 << (RebbValParser.IPV4 - 45)) | (1 << (RebbValParser.IPV6 - 45)) | (1 << (RebbValParser.PRIVATEIP - 45)) | (1 << (RebbValParser.URL - 45)) | (1 << (RebbValParser.MAC - 45)) | (1 << (RebbValParser.IMEI - 45)) | (1 << (RebbValParser.IMEISV - 45)) | (1 << (RebbValParser.ISBN - 45)) | (1 << (RebbValParser.PERCENTAGE - 45)) | (1 << (RebbValParser.BASE64 - 45)) | (1 << (RebbValParser.NUMBER - 45)) | (1 << (RebbValParser.INT - 45)) | (1 << (RebbValParser.FLOAT - 45)) | (1 << (RebbValParser.PHONE - 45)) | (1 << (RebbValParser.MOBILE - 45)) | (1 << (RebbValParser.UUID - 45)) | (1 << (RebbValParser.GBCODE - 45)) | (1 << (RebbValParser.ID - 45)) | (1 << (RebbValParser.PASSPORT - 45)))) != 0)):
                     localctx.is_type = self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
@@ -1167,13 +1190,22 @@ class RebbValParser ( Parser ):
                 pass
 
             elif la_ == 8:
-                localctx = RebbValParser.IsHexContext(self, localctx)
+                localctx = RebbValParser.ArrayIsUniqueContext(self, localctx)
                 self.enterOuterAlt(localctx, 8)
                 self.state = 56
                 self.match(RebbValParser.T__12)
                 self.state = 57
                 self.match(RebbValParser.T__13)
+                pass
+
+            elif la_ == 9:
+                localctx = RebbValParser.IsHexContext(self, localctx)
+                self.enterOuterAlt(localctx, 9)
                 self.state = 58
+                self.match(RebbValParser.T__12)
+                self.state = 59
+                self.match(RebbValParser.T__14)
+                self.state = 60
                 localctx.is_type = self._input.LT(1)
                 _la = self._input.LA(1)
                 if not(_la==RebbValParser.NUMBER or _la==RebbValParser.COLOR):
@@ -1183,28 +1215,28 @@ class RebbValParser ( Parser ):
                     self.consume()
                 pass
 
-            elif la_ == 9:
+            elif la_ == 10:
                 localctx = RebbValParser.IsCustomContext(self, localctx)
-                self.enterOuterAlt(localctx, 9)
-                self.state = 59
+                self.enterOuterAlt(localctx, 10)
+                self.state = 61
                 self.match(RebbValParser.T__12)
-                self.state = 60
+                self.state = 62
                 localctx.is_type = self.match(RebbValParser.CustomFunction)
                 pass
 
-            elif la_ == 10:
+            elif la_ == 11:
                 localctx = RebbValParser.MatchContext(self, localctx)
-                self.enterOuterAlt(localctx, 10)
-                self.state = 61
-                self.match(RebbValParser.T__14)
-                self.state = 62
+                self.enterOuterAlt(localctx, 11)
+                self.state = 63
+                self.match(RebbValParser.T__15)
+                self.state = 64
                 localctx.regex = self.match(RebbValParser.RegularExpressionLiteral)
                 pass
 
-            elif la_ == 11:
+            elif la_ == 12:
                 localctx = RebbValParser.AgeCompareContext(self, localctx)
-                self.enterOuterAlt(localctx, 11)
-                self.state = 63
+                self.enterOuterAlt(localctx, 12)
+                self.state = 65
                 localctx.op = self._input.LT(1)
                 _la = self._input.LA(1)
                 if not(_la==RebbValParser.OLDER or _la==RebbValParser.YOUNGER):
@@ -1212,88 +1244,88 @@ class RebbValParser ( Parser ):
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
-                self.state = 64
-                self.match(RebbValParser.T__15)
-                self.state = 65
-                self.expression()
-                pass
-
-            elif la_ == 12:
-                localctx = RebbValParser.StringPositionContext(self, localctx)
-                self.enterOuterAlt(localctx, 12)
                 self.state = 66
-                localctx.op = self._input.LT(1)
-                _la = self._input.LA(1)
-                if not(_la==RebbValParser.T__16 or _la==RebbValParser.T__17):
-                    localctx.op = self._errHandler.recoverInline(self)
-                else:
-                    self._errHandler.reportMatch(self)
-                    self.consume()
+                self.match(RebbValParser.T__16)
                 self.state = 67
-                self.match(RebbValParser.T__18)
-                self.state = 68
                 self.expression()
                 pass
 
             elif la_ == 13:
-                localctx = RebbValParser.IntervalContext(self, localctx)
+                localctx = RebbValParser.StringPositionContext(self, localctx)
                 self.enterOuterAlt(localctx, 13)
+                self.state = 68
+                localctx.op = self._input.LT(1)
+                _la = self._input.LA(1)
+                if not(_la==RebbValParser.T__17 or _la==RebbValParser.T__18):
+                    localctx.op = self._errHandler.recoverInline(self)
+                else:
+                    self._errHandler.reportMatch(self)
+                    self.consume()
                 self.state = 69
+                self.match(RebbValParser.T__19)
+                self.state = 70
+                self.expression()
+                pass
+
+            elif la_ == 14:
+                localctx = RebbValParser.IntervalContext(self, localctx)
+                self.enterOuterAlt(localctx, 14)
+                self.state = 71
                 localctx.start = self._input.LT(1)
                 _la = self._input.LA(1)
-                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RebbValParser.T__3) | (1 << RebbValParser.T__19) | (1 << RebbValParser.T__20))) != 0)):
+                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RebbValParser.T__3) | (1 << RebbValParser.T__20) | (1 << RebbValParser.T__21))) != 0)):
                     localctx.start = self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
-                self.state = 70
-                self.expression()
-                self.state = 71
-                self.match(RebbValParser.T__21)
                 self.state = 72
                 self.expression()
                 self.state = 73
+                self.match(RebbValParser.T__22)
+                self.state = 74
+                self.expression()
+                self.state = 75
                 localctx.end = self._input.LT(1)
                 _la = self._input.LA(1)
-                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RebbValParser.T__4) | (1 << RebbValParser.T__19) | (1 << RebbValParser.T__20))) != 0)):
+                if not((((_la) & ~0x3f) == 0 and ((1 << _la) & ((1 << RebbValParser.T__4) | (1 << RebbValParser.T__20) | (1 << RebbValParser.T__21))) != 0)):
                     localctx.end = self._errHandler.recoverInline(self)
                 else:
                     self._errHandler.reportMatch(self)
                     self.consume()
                 pass
 
-            elif la_ == 14:
+            elif la_ == 15:
                 localctx = RebbValParser.ArrayContext(self, localctx)
-                self.enterOuterAlt(localctx, 14)
-                self.state = 75
+                self.enterOuterAlt(localctx, 15)
+                self.state = 77
                 self.arrayLiteral()
                 pass
 
-            elif la_ == 15:
+            elif la_ == 16:
                 localctx = RebbValParser.StringContext(self, localctx)
-                self.enterOuterAlt(localctx, 15)
-                self.state = 76
+                self.enterOuterAlt(localctx, 16)
+                self.state = 78
                 self.match(RebbValParser.StringLiteral)
                 pass
 
-            elif la_ == 16:
+            elif la_ == 17:
                 localctx = RebbValParser.NumberContext(self, localctx)
-                self.enterOuterAlt(localctx, 16)
-                self.state = 77
+                self.enterOuterAlt(localctx, 17)
+                self.state = 79
                 self.match(RebbValParser.NumbericLiteral)
                 pass
 
-            elif la_ == 17:
+            elif la_ == 18:
                 localctx = RebbValParser.DateContext(self, localctx)
-                self.enterOuterAlt(localctx, 17)
-                self.state = 78
+                self.enterOuterAlt(localctx, 18)
+                self.state = 80
                 self.match(RebbValParser.DateLiteral)
                 pass
 
-            elif la_ == 18:
+            elif la_ == 19:
                 localctx = RebbValParser.TimeContext(self, localctx)
-                self.enterOuterAlt(localctx, 18)
-                self.state = 79
+                self.enterOuterAlt(localctx, 19)
+                self.state = 81
                 self.match(RebbValParser.TimeLiteral)
                 pass
 
@@ -1346,24 +1378,24 @@ class RebbValParser ( Parser ):
         self._la = 0 # Token type
         try:
             self.enterOuterAlt(localctx, 1)
-            self.state = 82
-            self.match(RebbValParser.T__20)
-            self.state = 83
+            self.state = 84
+            self.match(RebbValParser.T__21)
+            self.state = 85
             self.match(RebbValParser.NumbericLiteral)
-            self.state = 88
+            self.state = 90
             self._errHandler.sync(self)
             _la = self._input.LA(1)
-            while _la==RebbValParser.T__22:
-                self.state = 84
-                self.match(RebbValParser.T__22)
-                self.state = 85
+            while _la==RebbValParser.T__23:
+                self.state = 86
+                self.match(RebbValParser.T__23)
+                self.state = 87
                 self.match(RebbValParser.NumbericLiteral)
-                self.state = 90
+                self.state = 92
                 self._errHandler.sync(self)
                 _la = self._input.LA(1)
 
-            self.state = 91
-            self.match(RebbValParser.T__19)
+            self.state = 93
+            self.match(RebbValParser.T__20)
         except RecognitionException as re:
             localctx.exception = re
             self._errHandler.reportError(self, re)

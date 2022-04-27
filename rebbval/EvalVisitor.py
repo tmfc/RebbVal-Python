@@ -403,6 +403,14 @@ class EvalVisitor(RebbValVisitor):
         b = BuildInFunctions(self.__config)
         self.__set_value(ctx, b.check(ctx.is_type.type, self.__obj))
 
+    def visitArrayIsUnique(self, ctx: RebbValParser.ArrayIsUniqueContext):
+        if not isinstance(self.__obj, list):
+            self.__set_value(ctx, False)
+            self.__error = "ObjectTypeNotSupported"
+        else:
+            result = len(set(self.__obj)) == len(self.__obj)
+            self.__set_value(ctx, result)
+
     def visitIsHex(self, ctx: RebbValParser.IsHexContext):
         b = BuildInFunctions(self.__config)
         self.__set_value(ctx, b.check_hex(ctx.is_type.type, self.__obj))
